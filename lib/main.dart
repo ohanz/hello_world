@@ -105,6 +105,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+             const Text(
+          "flutterassets.com"
+              "\n\nProgramming isn't about what you know;"
+              "\nIt's about what you see around you."
+              "\n\n - Ohanz",
+        ),
             const Text("Tap to See Magic",
             style: TextStyle(fontWeight: FontWeight.bold , fontSize:37,)
             ),
@@ -115,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const Text('Go On', style: TextStyle()),
           ],
         ),
       ),
