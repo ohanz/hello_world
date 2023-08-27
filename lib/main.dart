@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -86,9 +86,14 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
+      body:
+       Center(
         // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+        // in the middle of the parent.]
+    // ElevatedButton(child: Text('Navigate'),
+    //   onPressed: () {
+        
+    //   },),)
         child: Column(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
@@ -105,11 +110,17 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ElevatedButton(onPressed: (){
+              Navigator.push(context,
+               MaterialPageRoute(
+                builder: (_) => const AboutScreen(),));
+            }, child: const Text('Navigate Now')),
              const Text(
-          "flutterassets.com"
+          "Ohanz.hype"
               "\n\nProgramming isn't about what you know;"
               "\nIt's about what you see around you."
-              "\n\n - Ohanz",
+              "\n\n - Ohanz", 
+              style: TextStyle(fontWeight: FontWeight.bold)
         ),
             const Text("Tap to See Magic",
             style: TextStyle(fontWeight: FontWeight.bold , fontSize:37,)
@@ -131,5 +142,87 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class AboutScreen extends StatefulWidget {
+  const AboutScreen({super.key});
+
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('About'),
+        
+      ),
+      body: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+                leading: const Icon(Icons.list),
+                trailing: const Text(
+                  "GFG",
+                  style: TextStyle(color: Colors.green, fontSize: 15),
+                ),
+                title: Text("List item $index"));
+          }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (_) => const EditBioScreen(),));
+        },
+         tooltip: 'Edit Now',
+        child: const Icon(Icons.add),
+        ),
+     // 
+    );
+  }
+}
+
+class EditBioScreen extends StatefulWidget{
+  const EditBioScreen({super.key});
+
+  @override
+  State<EditBioScreen> createState() => _EditBioScreenState();
+}
+
+class _EditBioScreenState extends State<EditBioScreen> {
+  @override
+  Widget build(BuildContext context) {
+   return Scaffold(
+    appBar: AppBar(
+      title: const Text('Edit Your Bio'),
+
+      // leading: const Icon(Icons.menu),
+        actions: [
+          IconButton(onPressed: () => {}, icon: const Icon(Icons.search)),
+          IconButton(onPressed: () => {}, icon: const Icon(Icons.more_vert)),
+        ],
+    ),
+   );
+  }
+}
+
+class PeopleScreen extends StatefulWidget{
+  const PeopleScreen({super.key});
+
+  @override
+  State<PeopleScreen> createState() => _PeopleScreenState();
+}
+
+class _PeopleScreenState extends State<PeopleScreen> {
+  @override
+  Widget build(BuildContext context) {
+   return Scaffold(
+    appBar: AppBar(
+      title: const Text('Find Your Friends'),
+
+    ),
+   );
   }
 }
