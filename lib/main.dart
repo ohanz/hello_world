@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart'; 
 
 void main() {
   runApp(const MyApp());
@@ -192,6 +193,8 @@ class EditBioScreen extends StatefulWidget{
 }
 
 class _EditBioScreenState extends State<EditBioScreen> {
+   Color _color = Color.fromRGBO(141, 48, 48, 1);
+   Color _color1 = Colors.green;
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -204,6 +207,43 @@ class _EditBioScreenState extends State<EditBioScreen> {
           IconButton(onPressed: () => {}, icon: const Icon(Icons.more_vert)),
         ],
     ),
+    body:  Stack(
+      alignment: Alignment.center,
+      children: [
+        Center(
+          child: Container( // Your Image
+          color: _color,
+              height: 100,
+              width: 100,
+              child: GestureDetector( onTap: () => {
+                 Navigator.push(context, 
+          MaterialPageRoute(builder: (_) => const PeopleScreen(),))
+              },
+),
+              
+        ), 
+    ),
+     Positioned(
+      bottom: 10, //right: 20,
+      child: InkWell(
+        child: Container( color: _color1,
+         height: 50,
+        width: 100,
+        ),
+        onTap: () => {
+          print("Container pressed"),
+          setState(() {
+            _color1 == Colors.yellow
+                ? _color1 = Colors.green
+                : _color1 = Colors.yellow;
+          })
+        },
+        
+      )),
+      
+    ]
+      
+    )
    );
   }
 }
@@ -216,12 +256,47 @@ class PeopleScreen extends StatefulWidget{
 }
 
 class _PeopleScreenState extends State<PeopleScreen> {
+
+
+void _popToast(BuildContext ct){
+  Fluttertoast.showToast(  
+        msg: 'This is toast notification',  
+        toastLength: Toast.LENGTH_SHORT,  
+        gravity: ToastGravity.BOTTOM,  
+        timeInSecForIosWeb: 1,  
+        backgroundColor: Colors.red,  
+        textColor: Colors.yellow  
+    ); 
+}
+
+void _showToast(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Added to favorite'),
+        action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+}
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
     appBar: AppBar(
       title: const Text('Find Your Friends'),
+      actions: <Widget>[
+    TextButton(
+      onPressed: ()=> _showToast(context),
+      child: Text('iSave'),
+    ),
+  ],
 
+    ),
+
+    body: Center(
+      child: ElevatedButton(onPressed: (){
+              _popToast(context);
+            }, child: const Text('Toast Now')),
     ),
    );
   }
